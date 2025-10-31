@@ -1,0 +1,13 @@
+{
+  // Treat plain .css files as PostCSS so the editor recognizes Tailwind at-rules
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  // Optional: enable Tailwind CSS IntelliSense if installed
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "javascript": "javascript",
+    "javascriptreact": "javascript",
+    "typescriptreact": "typescript"
+  }
+}
