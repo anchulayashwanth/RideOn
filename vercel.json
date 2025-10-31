@@ -1,4 +1,9 @@
 {
+  "build": {
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
   "builds": [
     {
       "src": "frontend/package.json",
