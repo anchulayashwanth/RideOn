@@ -1,15 +1,12 @@
-/** @type {import('postcss-load-config').Config} */
-import nesting from 'postcss-nesting'
-import tailwindcss from 'tailwindcss'
-import autoprefixer from 'autoprefixer'
+// postcss.config.js
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import postcssNesting from 'postcss-nesting';
 
-const config = {
+export default {
   plugins: [
-    // Enable nesting BEFORE Tailwind so nested rules are processed correctly
-    nesting(),
-    tailwindcss(),
-    autoprefixer(),
+    postcssNesting,  // must come before Tailwind
+    tailwindcss,
+    autoprefixer,
   ],
-}
-
-export default config
+};
