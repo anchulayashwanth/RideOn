@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import carRoutes from "./routes/carRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
@@ -23,15 +26,29 @@ mongoose
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection error:", err.message));
 
-// Test Route
-app.get("/", (req, res) => res.send("RideOn API is running 🚗"));
-
-// Routes
+// --- API Routes ---
 app.use("/api/cars", carRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/bookings", bookingRoutes);
 
-// Start Server
-const PORT = process.env.PORT || 5000;
+// --- Serve Frontend in Production ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+  app.use(express.static(frontendPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(frontendPath, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("RideOn API is running 🚗 (Development Mode)");
+  });
+}
+
+// --- Start Server ---
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

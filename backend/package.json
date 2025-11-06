@@ -4,12 +4,11 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-  "dev": "nodemon server.js",
-  "start": "node server.js",
-  "build": "cd ../frontend && npm install && npm run build"
-},
-"postinstall": "cd ../frontend && chmod +x ./node_modules/.bin/vite || true"
-,
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "cd ../frontend && npm install && npm run build"
+  },
+  "postinstall": "cd ../frontend && chmod +x ./node_modules/.bin/vite || true",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
@@ -20,5 +19,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18 <23"
   }
 }
